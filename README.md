@@ -36,4 +36,4 @@ From literature and research article, pIC50 values and other properties were ext
 
 ## F. Contact
 
-@mhn-research
+[@mhn-research](https://github.com/mhn-research)
