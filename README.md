@@ -30,8 +30,10 @@ From literature and research article, pIC50 values and other properties were ext
 
 ## C. Models and Results
 
-## D. How to use this repositor
+## D. How to use this repository
 
 ## E. License
 
 ## F. Contact
+
+<@mhn-research>
