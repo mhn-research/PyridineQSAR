@@ -19,7 +19,7 @@ From literature and research article, pIC50 values and other properties were ext
 
 3. **Feature engineering**
 
-<img width="1330" height="578" alt="image" src="https://github.com/user-attachments/assets/c210e403-0eb7-4e02-9fa9-b1819cc523be" />
+<img width="1274" height="583" alt="image" src="https://github.com/user-attachments/assets/3cd64bf7-99cb-4eff-bf58-f75017e98f69" />
 
 
 5. **Model building**
