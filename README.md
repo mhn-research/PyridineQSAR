@@ -48,6 +48,7 @@ A comprehensive list of supervised ML techniques used for modeling. Listed below
 Best perfoming model is chosoen based on multiple dependant results as tablulated below:
 
 | Feature variation | Model | R2(CV) | RMSE | MAE | Std. Dev | Rank |
+| ----------------- | ----- | ------ | ---- | --- | -------- | ---- |
 
 Selection logic is:
 1. Remove models with Low R2
