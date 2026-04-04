@@ -1,6 +1,6 @@
 # CuPyridineQSAR
 
-This repository is supporting Quantitative Structure-Activity relationship (QSAR) for Pyridine compounds. Quantitative Structure-Activity Relationship (QSAR) is a computational modeling method used in chemistry, pharmacology, and toxicology to predict the biological activity or property of a compound based on its molecular structure.
+This repository is supporting work used to derive Quantitative Structure-Activity relationship (QSAR) for Copper-Pyridine complexes. Quantitative Structure-Activity Relationship (QSAR) is a computational modeling method used in chemistry, pharmacology, and toxicology to predict the biological activity or property of a compound based on its molecular structure. This repository contains information about feature selection, model building, chosing best performing models, predicting pIC50 values along with confidence score.
 
 Following diagram demonstrates end-to-end approach that we implemented for predicting **pIC50** value for unknown Copper-Pyridine Complexes.
 
