@@ -4,7 +4,7 @@ This repository is supporting work used to derive Quantitative Structure-Activit
 
 Following diagram demonstrates end-to-end approach that we implemented for predicting **pIC50** value for unknown Copper-Pyridine Complexes.
 
-<img width="1309" height="568" alt="image" src="https://github.com/user-attachments/assets/c331b932-4345-4ed3-9df3-be22f3c00f5e" />
+<img width="1300" height="560" alt="image" src="https://github.com/user-attachments/assets/11ac2f07-5b5b-4c17-ac20-18abc81cb05e" />
 
 ## A. Describing the approach adopted during various phases
 
