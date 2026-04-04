@@ -19,8 +19,9 @@ From literature and research article, pIC50 values and other properties were ext
 
 3. **Feature engineering**
 
-<img width="1274" height="583" alt="image" src="https://github.com/user-attachments/assets/3cd64bf7-99cb-4eff-bf58-f75017e98f69" />
+Data derived from publicly available libraries such as RdKit and MorganDescriptors Fingerprint, along with suitable/associted chemical properties are taken into consideration for feature engineering. All possible combinations feature selection is listed below: 
 
+<img width="1274" height="583" alt="image" src="https://github.com/user-attachments/assets/3cd64bf7-99cb-4eff-bf58-f75017e98f69" />
 
 5. **Model building**
 6. **Model screening**
