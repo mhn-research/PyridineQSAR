@@ -18,12 +18,16 @@ From literature and research article, pIC50 values and other properties were ext
 | c1ccnc(c1)c1nc(ccc1)c1ncccc1 | [H]O[H] | 1 | 24h | A2780 | 7.1 | 5.15
 
 3. **Feature engineering**
-4. **Model building**
-5. **Model screening**
-6. **Generate Virtual compounds**
-7. **Predict pIC50**
-8. **Screen potential candidates**
-9. **Synthesis**
+
+<img width="1330" height="578" alt="image" src="https://github.com/user-attachments/assets/c210e403-0eb7-4e02-9fa9-b1819cc523be" />
+
+
+5. **Model building**
+6. **Model screening**
+7. **Generate Virtual compounds**
+8. **Predict pIC50**
+9. **Screen potential candidates**
+10. **Synthesis**
 
 ## B. Best performing Models and Results
 
