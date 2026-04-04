@@ -25,14 +25,12 @@ From literature and research article, pIC50 values and other properties were ext
 8. **Screen potential candidates**
 9. **Synthesis**
 
-## B. Repository strcuture
+## B. Best performing Models and Results
 
-## C. Models and Results
+## C. How to use this repository
 
-## D. How to use this repository
+## D. License
 
-## E. License
-
-## F. Contact
+## E. Contact
 
 [@mhn-research](https://github.com/mhn-research)
