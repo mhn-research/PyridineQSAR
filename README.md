@@ -25,3 +25,13 @@ From literature and research article, pIC50 values and other properties were ext
 7. **Predict pIC50**
 8. **Screen potential candidates**
 9. **Synthesis**
+
+## B. Repository strcuture
+
+## C. Models and Results
+
+## D. How to use this repositor
+
+## E. License
+
+## F. Contact
