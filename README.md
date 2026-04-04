@@ -23,13 +23,14 @@ Data derived from publicly available libraries such as RdKit and MorganDescripto
 
 <img width="1274" height="583" alt="image" src="https://github.com/user-attachments/assets/3cd64bf7-99cb-4eff-bf58-f75017e98f69" />
 
-
 5. **Model building**
-6. **Model screening**
-7. **Generate Virtual compounds**
-8. **Predict pIC50**
-9. **Screen potential candidates**
-10. **Synthesis**
+
+   
+7. **Model screening**
+8. **Generate Virtual compounds**
+9. **Predict pIC50**
+10. **Screen potential candidates**
+11. **Synthesis**
 
 ## B. Best performing Models and Results
 
