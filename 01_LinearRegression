@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyPxVfhCX7ox7zeTHIxsZmnD"
+      "authorship_tag": "ABX9TyMiTYiV+1RAH4z8NB7Hbsqy"
     },
     "kernelspec": {
       "name": "python3",
@@ -17,11 +17,25 @@
   "cells": [
     {
       "cell_type": "code",
-      "execution_count": null,
+      "execution_count": 26,
       "metadata": {
-        "id": "hdbKSwT164Wy"
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hdbKSwT164Wy",
+        "outputId": "ade8a577-c280-4d00-f87b-a1e623138dd3"
       },
-      "outputs": [],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: rdkit in /usr/local/lib/python3.12/dist-packages (2026.3.1)\n",
+            "Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (from rdkit) (2.0.2)\n",
+            "Requirement already satisfied: Pillow in /usr/local/lib/python3.12/dist-packages (from rdkit) (11.3.0)\n"
+          ]
+        }
+      ],
       "source": [
         "# Install required packages if needed\n",
         "!pip install rdkit\n",
@@ -68,7 +82,7 @@
     {
       "cell_type": "code",
       "source": [
-        "df = pd.read_csv('/content/00_base_data.csv')\n",
+        "df = pd.read_csv('/content/sample_data/00_base_data.csv')\n",
         "print(f\"Base data shape: {df.shape}\")\n",
         "print(f\"Base data Information: {df.info()}\")\n",
         "#print(df.head(3))"
@@ -78,9 +92,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "9FLQpfSM8izq",
-        "outputId": "a8072e63-3ff8-445a-c73d-b198e44abfca"
+        "outputId": "6fd51bb4-daa1-4a5c-8d0a-09fb584a3bf0"
       },
-      "execution_count": 11,
+      "execution_count": 33,
       "outputs": [
         {
           "output_type": "stream",
@@ -128,16 +142,16 @@
         "select_column = ['L1', 'L2', 'L3', 'pIC50']\n",
         "\n",
         "clean_data = df_clean[select_column]\n",
-        "clean_data.to_csv('/content/00_clean_data.csv', index=False)"
+        "clean_data.to_csv('/content/sample_data/00_clean_data.csv', index=False)"
       ],
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
         "id": "JE_r96KAkL7I",
-        "outputId": "1cafb7ef-0cb0-4387-e1df-496bf06c15b6"
+        "outputId": "44e7836c-25ff-4171-ad0f-62d7c481783d"
       },
-      "execution_count": 16,
+      "execution_count": 34,
       "outputs": [
         {
           "output_type": "stream",
@@ -160,16 +174,177 @@
             " 8   pIC50                    145 non-null    float64\n",
             "dtypes: float64(1), int64(2), object(6)\n",
             "memory usage: 11.3+ KB\n",
-            "Cleaned data info:  None\n",
-            "                                                   L1  \\\n",
-            "22  c1(cc(cc(n1)c1ccccn1)c1cc(c(c(c1)OC)OC)OC)c1nc...   \n",
-            "23             c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1   \n",
-            "24             c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1   \n",
-            "\n",
-            "                                     L2                  L3  pIC50  \n",
-            "22                             c1nccn1C   [O-]Cl(=O)(=O)=O    5.90  \n",
-            "23  C1=C(C2=C(C=C1)C(C(=CC2=O)C)=O)O[H]       O[N+](=O)[O-]   4.98  \n",
-            "24   c1c(cc2c(c1O)c(=O)cc(o2)c1ccccc1)O      O[N+](=O)[O-]    5.09  \n"
+            "Cleaned data info:  None\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Feature extraction**\n",
+        "\n",
+        "In this stage two operations are performed\n",
+        "1. Extracting descriptor values from rdkit library\n",
+        "2. extracting ECFP4 Fingerprints"
+      ],
+      "metadata": {
+        "id": "z6wfboMg1DR9"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df_clean = pd.read_csv('/content/sample_data/00_clean_data.csv')\n",
+        "print(f\"Base data shape: {df_clean.shape}\")\n",
+        "print(f\"Base data Information: {df_clean.info()}\")\n",
+        "\n",
+        "# Define descriptor names\n",
+        "L1_descriptor_names = ['L1_MolWt', 'L1_MolLogP', 'L1_NumHDonors', 'L1_NumHAcceptors', 'L1_TPSA', 'L1_NumRotatableBonds', 'L1_NumAromaticRings', 'L1_NumAliphaticRings', 'L1_FractionCSP3', 'L1_HeavyAtomCount']\n",
+        "L2_descriptor_names = ['L2_MolWt', 'L2_MolLogP', 'L2_NumHDonors', 'L2_NumHAcceptors', 'L2_TPSA', 'L2_NumRotatableBonds', 'L2_NumAromaticRings', 'L2_NumAliphaticRings', 'L2_FractionCSP3', 'L2_HeavyAtomCount']\n",
+        "L3_descriptor_names = ['L3_MolWt', 'L3_MolLogP', 'L3_NumHDonors', 'L3_NumHAcceptors', 'L3_TPSA', 'L3_NumRotatableBonds', 'L3_NumAromaticRings', 'L3_NumAliphaticRings', 'L3_FractionCSP3', 'L3_HeavyAtomCount']\n",
+        "\n",
+        "def extract_descriptors(smiles):\n",
+        "  mol = Chem.MolFromSmiles(smiles)\n",
+        "  if mol:\n",
+        "    descriptors = [\n",
+        "      Descriptors.MolWt(mol),\n",
+        "      Descriptors.MolLogP(mol),\n",
+        "      Descriptors.NumHDonors(mol),\n",
+        "      Descriptors.NumHAcceptors(mol),\n",
+        "      Descriptors.TPSA(mol),\n",
+        "      Descriptors.NumRotatableBonds(mol),\n",
+        "      Descriptors.NumAromaticRings(mol),\n",
+        "      Descriptors.NumAliphaticRings(mol),\n",
+        "      Descriptors.FractionCSP3(mol),\n",
+        "      Descriptors.HeavyAtomCount(mol),\n",
+        "    ]\n",
+        "    return descriptors\n",
+        "  else:\n",
+        "    return None\n",
+        "\n",
+        "# Extract descriptors from Ligand 1 - L1\n",
+        "print(f\"Extract descriptors for L1...\")\n",
+        "descriptors_data = {name: [] for name in L1_descriptor_names}\n",
+        "\n",
+        "for smiles in df_clean['L1']:\n",
+        "  Descriptors_values = extract_descriptors(smiles)\n",
+        "  if Descriptors_values:\n",
+        "    for i, names in enumerate(L1_descriptor_names):\n",
+        "      descriptors_data[names].append(Descriptors_values[i])\n",
+        "\n",
+        "  else:\n",
+        "    for names in L1_descriptor_names:\n",
+        "      descriptors_data[names].append(np.nan)\n",
+        "\n",
+        "for name in L1_descriptor_names:\n",
+        "  df_clean[name] = descriptors_data[name]\n",
+        "\n",
+        "\n",
+        "# Extract descriptors from Ligand 2 - L2\n",
+        "print(f\"Extract descriptors for L1...\")\n",
+        "descriptors_data = {name: [] for name in L2_descriptor_names}\n",
+        "\n",
+        "for smiles in df_clean['L2']:\n",
+        "  Descriptors_values = extract_descriptors(smiles)\n",
+        "  if Descriptors_values:\n",
+        "    for i, names in enumerate(L2_descriptor_names):\n",
+        "      descriptors_data[names].append(Descriptors_values[i])\n",
+        "\n",
+        "  else:\n",
+        "    for names in L2_descriptor_names:\n",
+        "      descriptors_data[names].append(np.nan)\n",
+        "\n",
+        "for name in L2_descriptor_names:\n",
+        "  df_clean[name] = descriptors_data[name]\n",
+        "\n",
+        "# Extract descriptors from Ligand 3 - L3\n",
+        "print(f\"Extract descriptors for L3...\")\n",
+        "descriptors_data = {name: [] for name in L3_descriptor_names}\n",
+        "\n",
+        "for smiles in df_clean['L3']:\n",
+        "  Descriptors_values = extract_descriptors(smiles)\n",
+        "  if Descriptors_values:\n",
+        "    for i, names in enumerate(L3_descriptor_names):\n",
+        "      descriptors_data[names].append(Descriptors_values[i])\n",
+        "\n",
+        "  else:\n",
+        "    for names in L3_descriptor_names:\n",
+        "      descriptors_data[names].append(np.nan)\n",
+        "\n",
+        "for name in L3_descriptor_names:\n",
+        "  df_clean[name] = descriptors_data[name]\n",
+        "\n",
+        "#Again do data cleaning - remove empty values:\n",
+        "df_clean = df_clean.dropna()\n",
+        "print(\"Post desriptor extraction and clean-up, Unique number of features: \", df_clean.shape)\n",
+        "\n",
+        "#Write to output file.\n",
+        "df_clean.to_csv(\"/content/sample_data/00_feature_data.csv\", index=False)"
+      ],
+      "metadata": {
+        "id": "uAx4QKVW1JIs",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "bc188e1d-d38d-45ae-9cc1-f20b4adeec93"
+      },
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Base data shape: (145, 4)\n",
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 145 entries, 0 to 144\n",
+            "Data columns (total 4 columns):\n",
+            " #   Column  Non-Null Count  Dtype  \n",
+            "---  ------  --------------  -----  \n",
+            " 0   L1      145 non-null    object \n",
+            " 1   L2      145 non-null    object \n",
+            " 2   L3      145 non-null    object \n",
+            " 3   pIC50   145 non-null    float64\n",
+            "dtypes: float64(1), object(3)\n",
+            "memory usage: 4.7+ KB\n",
+            "Base data Information: None\n",
+            "Extract descriptors for L1...\n",
+            "Extract descriptors for L1...\n",
+            "Extract descriptors for L3...\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[01:52:28] Can't kekulize mol.  Unkekulized atoms: 1 2 4\n",
+            "[01:52:28] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[01:52:28] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[01:52:28] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[01:52:28] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[01:52:28] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[01:52:28] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[01:52:28] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[01:52:28] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[01:52:28] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[01:52:28] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[01:52:28] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[01:52:28] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[01:52:28] n1)c1ccccc1)c1ncccc1/\n",
+            "[01:52:28] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[01:52:28] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n",
+            "[01:52:28] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[01:52:28] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[01:52:28] n1)c1ccccc1)c1ncccc1/\n",
+            "[01:52:28] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[01:52:28] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Post desriptor extraction and clean-up, Unique number of features:  (140, 34)\n"
           ]
         }
       ]
