@@ -23,6 +23,15 @@ Data derived from publicly available libraries such as RdKit and MorganDescripto
 
 <img width="1274" height="583" alt="image" src="https://github.com/user-attachments/assets/3cd64bf7-99cb-4eff-bf58-f75017e98f69" />
 
+  ***Data normalization techniques***
+  Descriptors values tends to vary in nature. Hence different normalization technique applied for each dataset based on its unique statistic distribution
+
+  | Properties | Normalization Technique | Justification |
+  | ---------- | ----------------------- | ------------- |
+  | MolWt, MolLogP | Robust Scaling | skewed distribution,  and ahaving outliers |
+  | NumHDonors | Binary Transform | Sparse count data where presence/absence is taken into consideration |
+  | L1_NumHAcceptors | One-hot | low cardinal count data |
+
    ***Other considerations:***
    1. Ligand Synergy Index (LSI)
    2. Chemical Diversity Score (CDS)
