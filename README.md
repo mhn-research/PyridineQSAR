@@ -31,8 +31,7 @@ Data derived from publicly available libraries such as RdKit and MorganDescripto
   | ---------- | ----------------------- | ------------- |
   | MolWt, MolLogP, TPSA, FractionCSP3 | Robust Scaling | skewed distribution,  and ahaving outliers |
   | NumHDonors | Binary Transform | Sparse count data where presence/absence is taken into consideration |
-  | NumHAcceptors, NumRotatableBonds, NumAromaticRings, NumAliphaticRings | One-hot | low cardinal count data |
-  | HeavyAtomCount | Z-Score | values clustered around the center |
+  | HeavyAtomCount, NumHAcceptors, NumRotatableBonds, NumAromaticRings, NumAliphaticRings | Z-Score | values clustered around the center |
 
    ***Other considerations:***
    1. Ligand Synergy Index (LSI)
