@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyMWg1vPgD7dvpVKZ5goMyQ0"
+      "authorship_tag": "ABX9TyP+WoYWUhuNg64gzlgUal5s"
     },
     "kernelspec": {
       "name": "python3",
@@ -17,27 +17,22 @@
   "cells": [
     {
       "cell_type": "code",
-      "execution_count": 1,
+      "execution_count": 4,
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
         "id": "hdbKSwT164Wy",
-        "outputId": "ae535710-ef1f-4f78-c6a2-7af7251d1b90"
+        "outputId": "872aef04-9389-4731-9622-f0c2ea966ff1"
       },
       "outputs": [
         {
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "Collecting rdkit\n",
-            "  Downloading rdkit-2026.3.1-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.8 kB)\n",
+            "Requirement already satisfied: rdkit in /usr/local/lib/python3.12/dist-packages (2026.3.1)\n",
             "Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (from rdkit) (2.0.2)\n",
-            "Requirement already satisfied: Pillow in /usr/local/lib/python3.12/dist-packages (from rdkit) (11.3.0)\n",
-            "Downloading rdkit-2026.3.1-cp312-cp312-manylinux_2_28_x86_64.whl (37.0 MB)\n",
-            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m37.0/37.0 MB\u001b[0m \u001b[31m48.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
-            "\u001b[?25hInstalling collected packages: rdkit\n",
-            "Successfully installed rdkit-2026.3.1\n"
+            "Requirement already satisfied: Pillow in /usr/local/lib/python3.12/dist-packages (from rdkit) (11.3.0)\n"
           ]
         }
       ],
@@ -57,7 +52,7 @@
         "from sklearn.model_selection import train_test_split, cross_val_score\n",
         "from sklearn.linear_model import LinearRegression\n",
         "from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score\n",
-        "from sklearn.preprocessing import StandardScaler\n",
+        "from sklearn.preprocessing import StandardScaler, RobustScaler, Binarizer\n",
         "from sklearn.feature_selection import SelectKBest, f_regression\n",
         "\n",
         "# Plotting and visualization\n",
@@ -97,9 +92,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "9FLQpfSM8izq",
-        "outputId": "ac7ccba4-cade-4241-d47e-f4ca39294cb1"
+        "outputId": "c6dca432-f276-4175-9738-923e607d2fcc"
       },
-      "execution_count": 2,
+      "execution_count": 5,
       "outputs": [
         {
           "output_type": "stream",
@@ -154,9 +149,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "JE_r96KAkL7I",
-        "outputId": "91022d02-33e1-45b5-9480-cc04c586f479"
+        "outputId": "dd1a8c17-011c-4d20-f3a3-6d8297a2e6a9"
       },
-      "execution_count": 3,
+      "execution_count": 6,
       "outputs": [
         {
           "output_type": "stream",
@@ -292,9 +287,9 @@
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
-        "outputId": "7557f0a7-2ba4-47bb-cb9c-3a5cd6bb7878"
+        "outputId": "cd3a4c79-582a-4e49-d7b3-991c01583ca1"
       },
-      "execution_count": 4,
+      "execution_count": 7,
       "outputs": [
         {
           "output_type": "stream",
@@ -313,42 +308,42 @@
             "dtypes: float64(1), object(3)\n",
             "memory usage: 4.7+ KB\n",
             "Base data Information: None\n",
-            "Extract descriptors for L1...\n",
-            "Extract descriptors for L1...\n",
-            "Extract descriptors for L3...\n"
+            "Extract descriptors for L1...\n"
           ]
         },
         {
           "output_type": "stream",
           "name": "stderr",
           "text": [
-            "[01:01:48] Can't kekulize mol.  Unkekulized atoms: 1 2 4\n",
-            "[01:01:48] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[01:01:48] SMILES Parse Error: check for mistakes around position 40:\n",
-            "[01:01:48] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[01:01:48] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[01:01:48] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
-            "[01:01:48] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[01:01:48] SMILES Parse Error: check for mistakes around position 40:\n",
-            "[01:01:48] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[01:01:48] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[01:01:48] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
-            "[01:01:48] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
-            "[01:01:48] SMILES Parse Error: check for mistakes around position 39:\n",
-            "[01:01:48] n1)c1ccccc1)c1ncccc1/\n",
-            "[01:01:48] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[01:01:48] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n",
-            "[01:01:48] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
-            "[01:01:48] SMILES Parse Error: check for mistakes around position 39:\n",
-            "[01:01:48] n1)c1ccccc1)c1ncccc1/\n",
-            "[01:01:48] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[01:01:48] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n"
+            "[05:45:01] Can't kekulize mol.  Unkekulized atoms: 1 2 4\n",
+            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[05:45:01] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[05:45:01] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[05:45:01] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[05:45:01] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[05:45:01] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[05:45:01] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[05:45:01] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[05:45:01] n1)c1ccccc1)c1ncccc1/\n",
+            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[05:45:01] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n",
+            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[05:45:01] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[05:45:01] n1)c1ccccc1)c1ncccc1/\n",
+            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[05:45:01] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n"
           ]
         },
         {
           "output_type": "stream",
           "name": "stdout",
           "text": [
+            "Extract descriptors for L1...\n",
+            "Extract descriptors for L3...\n",
             "Post desriptor extraction and clean-up, Unique number of features:  (140, 34)\n"
           ]
         }
@@ -368,9 +363,6 @@
       "cell_type": "code",
       "source": [
         "df = pd.read_csv('/content/sample_data/00_feature_data.csv')\n",
-        "\n",
-        "from sklearn.preprocessing import RobustScaler, StandardScaler\n",
-        "from sklearn.preprocessing import Binarizer\n",
         "\n",
         "# Configuration dictionary for various data inputs and its transform/normalization\n",
         "normalize_config = {\n",
@@ -392,36 +384,30 @@
         "\n",
         "    # Binarization for sparse count data\n",
         "    'L1_NumHDonors': {'method': 'binarize', 'threshold': 0},\n",
-        "\n",
         "    'L2_NumHDonors': {'method': 'binarize', 'threshold': 0},\n",
-        "\n",
         "    'L2_NumHDonors': {'method': 'binarize', 'threshold': 0},\n",
         "\n",
         "    # One-hot encoding for low cardinal count data\n",
-        "    'L1_NumHAcceptors': {'method': 'one_hot'},\n",
-        "    'L1_NumRotatableBonds': {'method': 'one_hot'},\n",
-        "    'L1_NumAromaticRings': {'method': 'one_hot'},\n",
+        "    'L1_NumHAcceptors': {'method': 'standard_scale'},\n",
+        "    'L1_NumRotatableBonds': {'method': 'standard_scale'},\n",
+        "    'L1_NumAromaticRings': {'method': 'standard_scale'},\n",
         "\n",
-        "    'L2_NumHAcceptors': {'method': 'one_hot'},\n",
-        "    'L2_NumRotatableBonds': {'method': 'one_hot'},\n",
-        "    'L2_NumAromaticRings': {'method': 'one_hot'},\n",
+        "    'L2_NumHAcceptors': {'method': 'standard_scale'},\n",
+        "    'L2_NumRotatableBonds': {'method': 'standard_scale'},\n",
+        "    'L2_NumAromaticRings': {'method': 'standard_scale'},\n",
         "\n",
-        "    'L3_NumHAcceptors': {'method': 'one_hot'},\n",
-        "    'L3_NumRotatableBonds': {'method': 'one_hot'},\n",
-        "    'L3_NumAromaticRings': {'method': 'one_hot'},\n",
+        "    'L3_NumHAcceptors': {'method': 'standard_scale'},\n",
+        "    'L3_NumRotatableBonds': {'method': 'standard_scale'},\n",
+        "    'L3_NumAromaticRings': {'method': 'standard_scale'},\n",
         "\n",
         "    # Standard scaling for continuous variables\n",
         "    'L1_HeavyAtomCount': {'method': 'standard_scale'},\n",
-        "\n",
         "    'L2_HeavyAtomCount': {'method': 'standard_scale'},\n",
-        "\n",
         "    'L3_HeavyAtomCount': {'method': 'standard_scale'},\n",
         "\n",
         "    # Already this is effective representation. No normalization technique required\n",
         "    'L1_NumAliphaticRings': {'method': 'none'},\n",
-        "\n",
         "    'L2_NumAliphaticRings': {'method': 'none'},\n",
-        "\n",
         "    'L3_NumAliphaticRings': {'method': 'none'}\n",
         "}\n",
         "\n",
@@ -446,27 +432,6 @@
         "    binary_values = binarizer.fit_transform(df[[column]])\n",
         "    df[column] = binary_values.astype(int)\n",
         "\n",
-        "  elif config['method'] == 'one_hot':\n",
-        "    # One-hot encoding\n",
-        "    # First convert to string to ensure proper categorical handling\n",
-        "    categorical_col = df[column].astype(str)\n",
-        "\n",
-        "    # Create dummy columns with boolean values (1/0)\n",
-        "    dummies = pd.get_dummies(categorical_col, prefix=column, dtype=int)\n",
-        "\n",
-        "    # Rename columns to remove any decimal points\n",
-        "    dummies.columns = [col.replace('.0', '') for col in dummies.columns]\n",
-        "\n",
-        "    # Get the position of the original column\n",
-        "    col_position = df.columns.get_loc(column)\n",
-        "\n",
-        "    # Drop the original column\n",
-        "    df.drop(column, axis=1, inplace=True)\n",
-        "\n",
-        "    # Insert the new columns at the original column's position\n",
-        "    for i, new_col in enumerate(dummies.columns):\n",
-        "      df.insert(col_position + i, new_col, dummies[new_col])\n",
-        "\n",
         "# Drop SMILES columns L1, L2, L3\n",
         "df = df.drop(columns=['L1', 'L2', 'L3'])\n",
         "\n",
@@ -475,8 +440,177 @@
       "metadata": {
         "id": "nkAaauAJfk6w"
       },
-      "execution_count": 24,
+      "execution_count": 8,
       "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Model Building - Linear Regression**\n",
+        "\n",
+        "\n",
+        "1.   Chose best feature base on feature selection methods like Statisticsl, SelectKBest, RFE, etc\n",
+        "\n",
+        "2.   Apply Chemical Intuitions for useful features"
+      ],
+      "metadata": {
+        "id": "yyPUYYmZL3y9"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.feature_selection import RFE, SelectKBest, f_regression\n",
+        "from sklearn.linear_model import LassoCV\n",
+        "import statsmodels.api as sm\n",
+        "\n",
+        "# Train Test split and fit linear regression model\n",
+        "df = pd.read_csv('/content/sample_data/00_normalized_data.csv')\n",
+        "\n",
+        "# Step # 1. Feature and Target selection\n",
+        "X = df.drop('pIC50', axis=1)\n",
+        "y = df['pIC50']  # Target variable\n",
+        "\n",
+        "# Step # 2. Train test split\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "results = {}\n",
+        "\n",
+        "# 3.a Lasso feature selection\n",
+        "#print(\"Running Lasso feature selection...\")\n",
+        "lasso = LassoCV(cv=5, random_state=42)\n",
+        "lasso.fit(X_train, y_train)\n",
+        "lasso_features = X_train.columns[lasso.coef_ != 0].tolist()\n",
+        "\n",
+        "lr_model = LinearRegression()\n",
+        "lr_model.fit(X_train[lasso_features], y_train)\n",
+        "score = lr_model.score(X_test[lasso_features], y_test)\n",
+        "\n",
+        "results['Lasso'] = {\n",
+        "    'score': score,\n",
+        "    'features': lasso_features,\n",
+        "    'num_features': len(lasso_features)\n",
+        "}\n",
+        "#print(f\"Lasso method - R2 Score: {score:.6f}, Features: {len(lasso_features)}\")\n",
+        "\n",
+        "# 3.b SelectKBest feature selection\n",
+        "#print(\"Running SelectKBest feature selection...\")\n",
+        "selector = SelectKBest(score_func=f_regression, k=10) # Use 10 best features as in your previous example\n",
+        "selector.fit(X_train, y_train)\n",
+        "kbest_features = X_train.columns[selector.get_support()].tolist()\n",
+        "\n",
+        "lr_model = LinearRegression()\n",
+        "lr_model.fit(X_train[kbest_features], y_train)\n",
+        "score = lr_model.score(X_test[kbest_features], y_test)\n",
+        "results['SelectKBest'] = {\n",
+        "    'score': score,\n",
+        "    'features': kbest_features,\n",
+        "    'num_features': len(kbest_features)\n",
+        "}\n",
+        "#print(f\"SelectKBest method - R2 Score: {score:.6f}, Features: {len(kbest_features)}\")\n",
+        "\n",
+        "# 3.c. RFE feature selection\n",
+        "#print(\"Running RFE feature selection...\")\n",
+        "estimator = LinearRegression()\n",
+        "selector = RFE(estimator, n_features_to_select=10, step=1)\n",
+        "selector.fit(X_train, y_train)\n",
+        "rfe_features = X_train.columns[selector.support_].tolist()\n",
+        "\n",
+        "lr_model = LinearRegression()\n",
+        "lr_model.fit(X_train[rfe_features], y_train)\n",
+        "score = lr_model.score(X_test[rfe_features], y_test)\n",
+        "\n",
+        "results['RFE'] = {\n",
+        "  'score': score,\n",
+        "  'features': rfe_features,\n",
+        "  'num_features': len(rfe_features)\n",
+        "}\n",
+        "#print(f\"RFE method - R2 Score: {score:.6f}, Features: {len(rfe_features)}\")\n",
+        "\n",
+        "# 3.d. Statistical method (p-value based selection)\n",
+        "#print(\"Running Statistical feature selection...\")\n",
+        "X_train_const = sm.add_constant(X_train)\n",
+        "model = sm.OLS(y_train, X_train_const).fit()\n",
+        "# Get features with p-value < 0.05\n",
+        "significant_features = model.pvalues[model.pvalues < 0.05].index.tolist()\n",
+        "if 'const' in significant_features:\n",
+        "    significant_features.remove('const')\n",
+        "\n",
+        "lr_model = LinearRegression()\n",
+        "lr_model.fit(X_train[significant_features], y_train)\n",
+        "score = lr_model.score(X_test[significant_features], y_test)\n",
+        "\n",
+        "results['statistical'] = {\n",
+        "  'score': score,\n",
+        "  'features': significant_features,\n",
+        "  'num_features': len(significant_features)\n",
+        "}\n",
+        "#print(f\"Statistical method - R2 Score: {score:.6f}, Features: {len(significant_features)}\")\n",
+        "\n",
+        "# Step # 3.e. Train LR model\n",
+        "lr_model = LinearRegression()\n",
+        "lr_model.fit(X_train, y_train)\n",
+        "score = lr_model.score(X_test, y_test)\n",
+        "\n",
+        "results['All Features'] = {\n",
+        "  'score': score,\n",
+        "  'features': X_train.columns.tolist(),\n",
+        "  'num_features': len(X_train.columns)\n",
+        "}\n",
+        "#print(f\"All Features - R2 Score: {score:.6f}, Features: {len(X_train.columns)}\")\n",
+        "\n",
+        "# Find the best method\n",
+        "best_method = max(results.items(), key=lambda x: x[1]['score'])\n",
+        "print(f\"\\nBest method: {best_method[0]} with R2 Score: {best_method[1]['score']:.6f}\")\n",
+        "print(f\"Number of features selected: {best_method[1]['num_features']}\")\n",
+        "print(f\"Features: {best_method[1]['features']}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CnxaOsUAyGSN",
+        "outputId": "9b0174ed-f7ea-40b6-9d13-90ff21912d00"
+      },
+      "execution_count": 31,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Best method: statistical with R2 Score: 0.388956\n",
+            "Number of features selected: 15\n",
+            "Features: ['L1_MolLogP', 'L1_NumHDonors', 'L1_TPSA', 'L1_NumRotatableBonds', 'L1_NumAromaticRings', 'L1_HeavyAtomCount', 'L2_NumHAcceptors', 'L2_TPSA', 'L2_NumRotatableBonds', 'L2_FractionCSP3', 'L2_HeavyAtomCount', 'L3_MolWt', 'L3_MolLogP', 'L3_NumHDonors', 'L3_HeavyAtomCount']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "K34I1jhzlIr2",
+        "outputId": "0d018582-089f-4266-bcd4-84d6ac589fa2"
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                        CV Mean R²  CV Std R²   Test R²\n",
+            "Gradient Boosting         0.527284   0.259266  0.433276\n",
+            "Random Forest             0.562986   0.240122  0.420337\n",
+            "k-Nearest Neighbors       0.506367   0.209259  0.255539\n",
+            "Support Vector Machine    0.441376   0.232195  0.185089\n",
+            "Linear Regression        -5.126819   7.123134  0.052263\n"
+          ]
+        }
+      ]
     }
   ]
 }
