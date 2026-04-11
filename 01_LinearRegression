@@ -4,7 +4,8 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyP+WoYWUhuNg64gzlgUal5s"
+      "authorship_tag": "ABX9TyMrJgI5CPeBr9wEa8wD6A5K",
+      "include_colab_link": true
     },
     "kernelspec": {
       "name": "python3",
@@ -16,14 +17,24 @@
   },
   "cells": [
     {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mhn-research/CuPyridineQSAR/blob/main/01_LinearRegression\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
       "cell_type": "code",
-      "execution_count": 4,
+      "execution_count": 42,
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
         "id": "hdbKSwT164Wy",
-        "outputId": "872aef04-9389-4731-9622-f0c2ea966ff1"
+        "outputId": "d1553e89-1325-4638-d49f-9d7465b91702"
       },
       "outputs": [
         {
@@ -43,6 +54,7 @@
         "\n",
         "import pandas as pd\n",
         "import numpy as np\n",
+        "import csv\n",
         "\n",
         "# Input library for feature extraction, and feature engineering\n",
         "from rdkit import Chem\n",
@@ -92,9 +104,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "9FLQpfSM8izq",
-        "outputId": "c6dca432-f276-4175-9738-923e607d2fcc"
+        "outputId": "d89987c9-fd20-43e1-c78f-1aacf224f826"
       },
-      "execution_count": 5,
+      "execution_count": 36,
       "outputs": [
         {
           "output_type": "stream",
@@ -149,9 +161,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "JE_r96KAkL7I",
-        "outputId": "dd1a8c17-011c-4d20-f3a3-6d8297a2e6a9"
+        "outputId": "5560ea43-e070-454a-b7ff-1859cab41d9c"
       },
-      "execution_count": 6,
+      "execution_count": 37,
       "outputs": [
         {
           "output_type": "stream",
@@ -287,9 +299,9 @@
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
-        "outputId": "cd3a4c79-582a-4e49-d7b3-991c01583ca1"
+        "outputId": "a7c3aecb-6c5c-46f2-d5d7-e53063c6cf5c"
       },
-      "execution_count": 7,
+      "execution_count": 38,
       "outputs": [
         {
           "output_type": "stream",
@@ -308,42 +320,42 @@
             "dtypes: float64(1), object(3)\n",
             "memory usage: 4.7+ KB\n",
             "Base data Information: None\n",
-            "Extract descriptors for L1...\n"
+            "Extract descriptors for L1...\n",
+            "Extract descriptors for L1...\n",
+            "Extract descriptors for L3...\n"
           ]
         },
         {
           "output_type": "stream",
           "name": "stderr",
           "text": [
-            "[05:45:01] Can't kekulize mol.  Unkekulized atoms: 1 2 4\n",
-            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[05:45:01] SMILES Parse Error: check for mistakes around position 40:\n",
-            "[05:45:01] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[05:45:01] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
-            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[05:45:01] SMILES Parse Error: check for mistakes around position 40:\n",
-            "[05:45:01] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
-            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[05:45:01] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
-            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
-            "[05:45:01] SMILES Parse Error: check for mistakes around position 39:\n",
-            "[05:45:01] n1)c1ccccc1)c1ncccc1/\n",
-            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[05:45:01] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n",
-            "[05:45:01] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
-            "[05:45:01] SMILES Parse Error: check for mistakes around position 39:\n",
-            "[05:45:01] n1)c1ccccc1)c1ncccc1/\n",
-            "[05:45:01] ~~~~~~~~~~~~~~~~~~~~^\n",
-            "[05:45:01] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n"
+            "[09:39:13] Can't kekulize mol.  Unkekulized atoms: 1 2 4\n",
+            "[09:39:13] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[09:39:13] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[09:39:13] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[09:39:13] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[09:39:13] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[09:39:13] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[09:39:13] SMILES Parse Error: check for mistakes around position 40:\n",
+            "[09:39:13] 1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1\n",
+            "[09:39:13] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[09:39:13] SMILES Parse Error: Failed parsing SMILES ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1' for input: ' c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/ OC(=O)c1ccccc1'\n",
+            "[09:39:13] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[09:39:13] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[09:39:13] n1)c1ccccc1)c1ncccc1/\n",
+            "[09:39:13] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[09:39:13] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n",
+            "[09:39:13] SMILES Parse Error: syntax error while parsing: c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/\n",
+            "[09:39:13] SMILES Parse Error: check for mistakes around position 39:\n",
+            "[09:39:13] n1)c1ccccc1)c1ncccc1/\n",
+            "[09:39:13] ~~~~~~~~~~~~~~~~~~~~^\n",
+            "[09:39:13] SMILES Parse Error: Failed parsing SMILES 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/' for input: 'c1(cc(cc(n1)c1ccccn1)c1ccccc1)c1ncccc1/'\n"
           ]
         },
         {
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "Extract descriptors for L1...\n",
-            "Extract descriptors for L3...\n",
             "Post desriptor extraction and clean-up, Unique number of features:  (140, 34)\n"
           ]
         }
@@ -440,7 +452,7 @@
       "metadata": {
         "id": "nkAaauAJfk6w"
       },
-      "execution_count": 8,
+      "execution_count": 39,
       "outputs": []
     },
     {
@@ -570,9 +582,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "CnxaOsUAyGSN",
-        "outputId": "9b0174ed-f7ea-40b6-9d13-90ff21912d00"
+        "outputId": "6263757c-474c-45a6-bfcc-9533071aafe9"
       },
-      "execution_count": 31,
+      "execution_count": 40,
       "outputs": [
         {
           "output_type": "stream",
@@ -587,30 +599,63 @@
       ]
     },
     {
-      "cell_type": "code",
-      "source": [],
+      "cell_type": "markdown",
+      "source": [
+        "**Test model with k-fold cross validation**"
+      ],
       "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "K34I1jhzlIr2",
-        "outputId": "0d018582-089f-4266-bcd4-84d6ac589fa2"
+        "id": "cQVTDvYdFj4a"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.model_selection import KFold\n",
+        "\n",
+        "# Initialize arrays to store results\n",
+        "r2_scores = []\n",
+        "rmse_scores = []\n",
+        "mae_scores = []\n",
+        "\n",
+        "# Manual cross-validation\n",
+        "kf = KFold(n_splits=10, shuffle=True, random_state=42)\n",
+        "for train_index, test_index in kf.split(X):\n",
+        "    X_train, X_test = X.iloc[train_index], X.iloc[test_index]\n",
+        "    y_train, y_test = y.iloc[train_index], y.iloc[test_index]\n",
+        "\n",
+        "    # Train model\n",
+        "    model = LinearRegression()\n",
+        "    model.fit(X_train, y_train)\n",
+        "\n",
+        "    # Make predictions\n",
+        "    y_pred = model.predict(X_test)\n",
+        "\n",
+        "    # Calculate metrics\n",
+        "    r2_scores.append(r2_score(y_test, y_pred))\n",
+        "    rmse_scores.append(np.sqrt(mean_squared_error(y_test, y_pred)))\n",
+        "    mae_scores.append(mean_absolute_error(y_test, y_pred))\n",
+        "\n",
+        "# Calculate final metrics\n",
+        "r2_cv = np.mean(r2_scores)\n",
+        "rmse_cv = np.mean(rmse_scores)\n",
+        "mae_cv = np.mean(mae_scores)\n",
+        "std_dev = np.std(r2_scores)\n",
+        "\n",
+        "#Write to output file\n",
+        "with open('results.csv', 'w', newline='') as file:\n",
+        "  writer = csv.writer(file)\n",
+        "\n",
+        "  #Write header\n",
+        "  writer.writerow([\"Model\", \"Variant\", \"R2(CV)\", \"RMSE\", \"MAE\", \"Std. Dev\", \"Rank\"])\n",
+        "\n",
+        "  #Write data output\n",
+        "  writer.writerow([\"Linear Regression\", best_method[0], f\"{r2_cv:.6f}\", f\"{rmse_cv:.6f}\", f\"{mae_cv:.6f}\", f\"{std_dev:.6f}\", 1])\n"
+      ],
+      "metadata": {
+        "id": "K34I1jhzlIr2"
       },
-      "execution_count": 30,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "                        CV Mean R²  CV Std R²   Test R²\n",
-            "Gradient Boosting         0.527284   0.259266  0.433276\n",
-            "Random Forest             0.562986   0.240122  0.420337\n",
-            "k-Nearest Neighbors       0.506367   0.209259  0.255539\n",
-            "Support Vector Machine    0.441376   0.232195  0.185089\n",
-            "Linear Regression        -5.126819   7.123134  0.052263\n"
-          ]
-        }
-      ]
+      "execution_count": 44,
+      "outputs": []
     }
   ]
 }
